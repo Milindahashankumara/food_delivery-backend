@@ -1,19 +1,15 @@
-import {
-  pgTable,
-  uuid,
-  varchar,
-  timestamp,
-  integer,
-} from 'drizzle-orm/pg-core';
+import { pgTable, uuid, varchar, timestamp } from 'drizzle-orm/pg-core';
 
-export const orders = pgTable('orders', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  customerName: varchar('customer_name', { length: 255 }).notNull(),
-  item: varchar('item', { length: 255 }).notNull(),
-  quantity: integer('quantity').notNull(),
-  status: varchar('status', { length: 50 }).notNull().default('pending'),
+export const dispatches = pgTable('dispatches', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  orderId: uuid('order_id').notNull(),
+  customerName: varchar('customer_name', { length: 100 }).notNull(),
+  item: varchar('item', { length: 100 }).notNull(),
+  riderStatus: varchar('rider_status', { length: 50 })
+    .notNull()
+    .default('dispatched'),
   createdAt: timestamp('created_at').defaultNow(),
 });
 
-export type Order = typeof orders.$inferSelect;
-export type NewOrder = typeof orders.$inferInsert;
+export type Dispatch = typeof dispatches.$inferSelect;
+export type NewDispatch = typeof dispatches.$inferInsert;
