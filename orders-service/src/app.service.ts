@@ -1,8 +1,8 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { CreateOrderDto } from './app.controller';
 import { db } from './db/db';
 import { orders } from './db/schema';
+import { CreateOrderDto } from './dto/create-order.dto';
 
 @Injectable()
 export class AppService {
