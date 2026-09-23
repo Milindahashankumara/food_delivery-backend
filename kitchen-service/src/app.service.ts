@@ -15,11 +15,17 @@ export class AppService {
     item: string;
     quantity: number;
   }) {
+    const item = data.item?.trim();
+    if (!item) {
+      throw new Error(`Order ${data.orderId} is missing an item`);
+    }
+
     const [ticket] = await db
       .insert(tickets)
       .values({
         orderId: data.orderId,
         customerName: data.customerName,
+        item,
         status: 'received',
       })
       .returning();
@@ -31,7 +37,7 @@ export class AppService {
     this.riderClient.emit('order_ready', {
       orderId: data.orderId,
       customerName: data.customerName,
-      item: data.item,
+      item,
     });
 
     console.log('Event Emitted to the rider_queue (Order ready for pickup)');

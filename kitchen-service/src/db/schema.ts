@@ -4,6 +4,7 @@ export const tickets = pgTable('tickets', {
   id: uuid('id').primaryKey().defaultRandom(),
   orderId: uuid('order_id').notNull(),
   customerName: varchar('customer_name', { length: 255 }).notNull(),
+  item: varchar('item', { length: 255 }).notNull(),
   status: varchar('status', { length: 50 }).notNull().default('received'),
   createdAt: timestamp('created_at').defaultNow(),
 });
