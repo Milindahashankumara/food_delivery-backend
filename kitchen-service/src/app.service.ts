@@ -20,7 +20,6 @@ export class AppService {
       .values({
         orderId: data.orderId,
         customerName: data.customerName,
-        item: data.item,
         status: 'received',
       })
       .returning();
