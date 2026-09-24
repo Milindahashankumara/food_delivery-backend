@@ -1,0 +1,2 @@
+ALTER TABLE "tickets" ADD COLUMN "item" varchar(255) DEFAULT '' NOT NULL;
+ALTER TABLE "tickets" ALTER COLUMN "item" DROP DEFAULT;
