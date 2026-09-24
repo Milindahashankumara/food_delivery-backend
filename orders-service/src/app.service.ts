@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { db } from './db/db';
 import { orders } from './db/schema';
@@ -11,11 +11,16 @@ export class AppService {
   ) {}
 
   async createOrder(dto: CreateOrderDto) {
+    const item = dto.item?.trim();
+    if (!item) {
+      throw new BadRequestException('item is required');
+    }
+
     const [order] = await db
       .insert(orders)
       .values({
         customerName: dto.customerName,
-        item: dto.item,
+        item,
         quantity: dto.quantity,
         status: 'pending',
       })

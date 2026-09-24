@@ -10,7 +10,7 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        url: ['amqp://guest:guest@localhost:5672'],
+        urls: ['amqp://guest:guest@localhost:5672'],
         queue: 'rider_queue',
         queueOptions: {
           durable: process.env.NODE_ENV === 'production',

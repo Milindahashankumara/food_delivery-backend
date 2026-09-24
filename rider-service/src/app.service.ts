@@ -29,7 +29,7 @@ export class AppService {
       rider +
         ' is on the way with your item ' +
         data.item +
-        'for customer ' +
+        ' for customer ' +
         data.customerName,
     );
   }
