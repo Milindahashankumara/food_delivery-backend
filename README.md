@@ -71,32 +71,9 @@ cd rider-service; pnpm start:dev
 
 The orders API listens on port `3000`. RabbitMQ is available on port `5672`; its management dashboard is available at `http://localhost:15672` using `guest` / `guest`.
 
-## Create an Order
-
-```powershell
-$body = @{ customerName = "Alex"; item = "Chicken Kottu"; quantity = 1 } | ConvertTo-Json
-Invoke-RestMethod -Method Post -Uri http://localhost:3000/orders -ContentType "application/json" -Body $body
-```
-
-The request creates an order, sends it to the kitchen, and then creates a rider dispatch after the kitchen publishes `order_ready`.
-
-## Useful Commands
-
-Run these commands inside the relevant service directory:
-
-```powershell
-pnpm build       # compile
-pnpm test        # unit tests
-pnpm test:e2e    # end-to-end tests
-pnpm db:generate # generate a migration after schema changes
-pnpm db:migrate  # apply migrations
-```
-
 ## Project Structure
 
-```text
-orders-service/   HTTP order creation and orders database
-kitchen-service/  kitchen queue consumer and ticket database
-rider-service/    rider queue consumer and dispatch database
+orders-service/ HTTP order creation and orders database
+kitchen-service/ kitchen queue consumer and ticket database
+rider-service/ rider queue consumer and dispatch database
 docker-compose.yml RabbitMQ configuration
-```
